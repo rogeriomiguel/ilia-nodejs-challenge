@@ -1,8 +1,17 @@
+/* eslint-disable no-console */
 import server from './server';
+import mongooseConnection from './config/mongoose';
 
-try {
-  server.init();
-} catch (error) {
-  // eslint-disable-next-line no-console
-  console.log(error);
-}
+(async () => {
+  try {
+    await mongooseConnection();
+  } catch (error) {
+    console.log('mongooseConnection', error);
+  }
+
+  try {
+    server.init();
+  } catch (error) {
+    console.log('expressServer', error);
+  }
+})();
