@@ -1,13 +1,12 @@
-/* eslint-disable no-plusplus */
 import { Request, Response, NextFunction } from 'express';
 import TransactionsDomain from '../domain/TransactionsDomain';
 
-class AppointmentController {
+class TransactionsController {
   async index(request: Request, response: Response, next: NextFunction) {
     try {
       const { type } = request.query as { type: string };
-      const transaction = await TransactionsDomain.getTransactions(type);
-      return response.json(transaction);
+      const transactions = await TransactionsDomain.getTransactions(type);
+      return response.json(transactions);
     } catch (error) {
       return next(error);
     }
@@ -23,6 +22,15 @@ class AppointmentController {
       return next(error);
     }
   }
+
+  async balance(_request: Request, response: Response, next: NextFunction) {
+    try {
+      const balance = await TransactionsDomain.getTransactionsBalance();
+      return response.json(balance);
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 
-export default new AppointmentController();
+export default new TransactionsController();

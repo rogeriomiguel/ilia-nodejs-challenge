@@ -15,6 +15,12 @@ class TransactionsRepository {
   create(transaction: Transaction): Promise<Transaction> {
     return TransactionModel.create(transaction);
   }
+
+  getAmountAggregation(): any {
+    return TransactionModel.aggregate([
+      { $group: { _id: null, amount: { $sum: '$amount' } } },
+    ]);
+  }
 }
 
 export default new TransactionsRepository();
