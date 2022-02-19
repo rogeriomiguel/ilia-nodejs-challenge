@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express, { Express } from 'express';
 import cors from 'cors';
 import routes from './routes';
+import errors from './middlewares/errors';
 
 class Server {
   private express: Express;
@@ -23,7 +24,7 @@ class Server {
   }
 
   initializeErrorsMiddlewares() {
-    return null;
+    this.express.use(errors);
   }
 
   init() {
