@@ -5,7 +5,7 @@ import routes from './routes';
 import errors from './middlewares/errors';
 
 class Server {
-  private express: Express;
+  express: Express;
 
   constructor() {
     this.express = express();
